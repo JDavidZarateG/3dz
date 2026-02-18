@@ -1,16 +1,30 @@
 [
   {
-    "category": "Materas",
+    "category": "materas",
     "title": "Zenith Black",
-    "description": "Matera para Suculenta, impresa en PLA premium",
-    "price": "10.000",
+    "description": "Elegante maceta con diseño geométrico en espiral, ideal para interiores modernos y escritorios minimalistas.",
+    "price": "15.000",
     "image": "Images/Imagenes inventario/PlantPotSuculentBlackModel1.png"
   },
   {
-    "category": "Llaveros",
-    "title": "Teddy Bear",
-    "description": "Descripción aquí.",
-    "price": "$15",
-    "image": "otra-imagen.png"
+    "category": "llaveros",
+    "title": "Llavero Teddy Bear",
+    "description": "Tierno oso decorativo impreso con un gradiente de color cálido y un corazón entre sus manos.",
+    "price": "$10.000",
+    "image": "Images/Imagenes inventario/TeddyBearKeyChain.png"
+  },
+  {
+    "category": "accesorios",
+    "title": "Rosa Custom Box",
+    "description": "Joyero personalizado con nombre en relieve y detalle de rosa en 3D",
+    "price": "$30.000",
+    "image": "Images/Imagenes inventario/Heartbox.png"
+  },
+  {
+    "category": "llaveros",
+    "title": "Llavero Runner Style",
+    "description": "Llavero detallado inspirado en calzado deportivo, ligero y resistente para el día a día.",
+    "price": "15.000",
+    "image": "Images/Imagenes inventario/NikeRunningShoe.png"
   }
 ]

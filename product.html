@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Producto <title>
+    <title>Detalles del Producto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,8 +18,11 @@
             text-align: center;
             padding: 20px;
         }
+        .logo {
+            height: 100px;
+        }
         .container {
-            max-width: 800px;
+            max-width: 1000px; /* Aumentado para acomodar el layout horizontal */
             margin: 20px auto;
             padding: 20px;
             background-color: white;
@@ -31,11 +34,35 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .product-detail {
+            display: flex; /* Flexbox para alinear imagen y texto horizontalmente */
+            gap: 20px; /* Espacio entre imagen y texto */
+            align-items: flex-start; /* Alinea al inicio */
+        }
         .product-detail img {
-            max-width: 100%;
+            max-width: 50%; /* Imagen ocupa la mitad del ancho */
             height: auto;
             border-radius: 8px;
-            margin-bottom: 20px;
+        }
+        .product-text {
+            flex: 1; /* El texto ocupa el resto del espacio */
+        }
+        .product-text h2 {
+            margin-top: 0;
+        }
+        .buy-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745; /* Verde para "buy" */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .buy-button:hover {
+            background-color: #218838;
         }
         .back-link {
             display: inline-block;
@@ -61,11 +88,22 @@
         .whatsapp-link:hover {
             background-color: #128c7e;
         }
+        /* Responsividad para móviles */
+        @media (max-width: 768px) {
+            .product-detail {
+                flex-direction: column; /* Apila imagen y texto verticalmente en móviles */
+            }
+            .product-detail img {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Detalles del Producto</h1>
+        <!-- Opcional: Agrega logo si quieres -->
+        <!-- <img src="images/logo.png" alt="Logo 3DZ" class="logo"> -->
     </header>
     
     <div class="container">
@@ -73,12 +111,16 @@
         
         <div class="product-detail">
             <img id="productImage" src="" alt="Producto">
-            <h2 id="productTitle"></h2>
-            <p id="productDescription"></p>
-            <h2><strong>Precio:</strong> <span id="productPrice"></span></h2>
+            <div class="product-text">
+                <h2 id="productTitle">Cargando...</h2>
+                <p id="productDescription">Cargando...</p>
+                <h2><strong>Precio:</strong> <span id="productPrice">Cargando...</span></h2>
+                <!-- Botón "Comprar" debajo del texto -->
+                <a id="buyButton" href="#" class="buy-button">Comprar</a>
+            </div>
         </div>
         
-        <a href="https://wa.me/3180187501?text=Hola,%20estoy%20interesado%20en%20este%20producto" class="whatsapp-link" target="_blank">
+        <a id="whatsappLink" href="https://wa.me/573180187501?text=Hola,%20estoy%20interesado%20en%20este%20producto" class="whatsapp-link" target="_blank">
             Contactar por WhatsApp
         </a>
     </div>
@@ -86,16 +128,27 @@
     <script>
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
-        const title = decodeURIComponent(urlParams.get('title') || '');
-        const description = decodeURIComponent(urlParams.get('description') || '');
-        const price = decodeURIComponent(urlParams.get('price') || '');
+        const title = decodeURIComponent(urlParams.get('title') || 'Producto no encontrado');
+        const description = decodeURIComponent(urlParams.get('description') || 'Descripción no disponible');
+        const price = decodeURIComponent(urlParams.get('price') || 'Precio no disponible');
         const image = decodeURIComponent(urlParams.get('image') || '');
 
-        // Poblar la página
+        // Poblar la página con valores por defecto si faltan
         document.getElementById('productTitle').textContent = title;
         document.getElementById('productDescription').textContent = description;
         document.getElementById('productPrice').textContent = price;
-        document.getElementById('productImage').src = image;
+        if (image) {
+            document.getElementById('productImage').src = image;
+        } else {
+            document.getElementById('productImage').src = 'images/placeholder.png';  // Imagen por defecto si no hay
+        }
+
+        // Actualizar el enlace de WhatsApp y el botón "Comprar" con el título del producto
+        const whatsappLink = document.getElementById('whatsappLink');
+        const buyButton = document.getElementById('buyButton');
+        const whatsappUrl = `https://wa.me/573180187501?text=Hola,%20estoy%20interesado%20en%20comprar%20el%20producto:%20${encodeURIComponent(title)}`;
+        whatsappLink.href = whatsappUrl;
+        buyButton.href = whatsappUrl;  // El botón "Comprar" también enlaza al WhatsApp
     </script>
 </body>
 </html>

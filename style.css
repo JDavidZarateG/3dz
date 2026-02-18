@@ -7,13 +7,94 @@ body {
 }
 
 header {
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    padding: 20px;
+    background-color: #f4f4f4;
+    /* Fondo opcional */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-detail img {
+    max-width: 100%;
+    height: 500px;
+    align-content: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    /* Logo a la izquierda, nav a la derecha */
+    align-items: center;
+    max-width: 1200px;
+    /* Ancho máximo para centrar */
+    margin: 0 auto;
+}
+
+.logo {
+    height: 150px;
+    /* Ajusta el tamaño del logo */
+    width: auto;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    /* Espacio entre enlaces */
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #007bff;
+    /* Color al pasar el mouse */
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        /* Apila logo y nav verticalmente */
+        text-align: center;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
 }
 
 .container {
+    align-content: center;
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
@@ -112,7 +193,7 @@ header {
 
 .catalog {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 20;
     opacity: 0;
@@ -133,13 +214,13 @@ header {
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    
+
 }
 
 .product:hover {
-    transform: scale(1.1);
+    transform: scale(1.01);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    
+
 }
 
 .product img {
