@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - 3DZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="Images/LOGO 3DZ.png" alt="Logo 3DZ" class="logo">
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#catalog">Catálogo</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Tu Carrito de Compras</h1>
+        
+        <div id="cart-items"></div>
+        
+        <div class="cart-total">
+            <h2>Total: <span id="total-price">0</span> COP</h2>
+            <a href="https://wa.me/573180187501?text=Hola,%20quiero%20comprar%20los%20siguientes%20productos:" 
+               id="whatsapp-order" 
+               class="buy-button" 
+               target="_blank">
+                Finalizar Compra por WhatsApp
+            </a>
+            <button onclick="clearCart()" class="clear-cart">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            const totalPriceEl = document.getElementById('total-price');
+            const whatsappBtn = document.getElementById('whatsapp-order');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Tu carrito está vacío</p>';
+                totalPriceEl.textContent = '0';
+                return;
+            }
+            
+            let total = 0;
+            let message = 'Hola, quiero comprar los siguientes productos:%0A';
+            
+            cartItems.innerHTML = cart.map((item, index) => {
+                const subtotal = item.price*1000 * item.quantity;
+                total += subtotal;
+                
+                message += `%0A- ${item.title}: ${item.quantity} x ${item.price*1000} COP = ${subtotal} COP`;
+                
+                return `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.title}" class="cart-img">
+                        <div class="cart-info">
+                            <h3>${item.title}</h3>
+                            <p>Precio: ${item.price*1000} COP</p>
+                            <p>Cantidad: ${item.quantity}</p>
+                            <p>Subtotal: ${subtotal} COP</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="remove-btn">X</button>
+                    </div>
+                `;
+            }).join('');
+            
+            message += `%0A%0ATotal: ${total} COP`;
+            
+            totalPriceEl.textContent = total;
+            whatsappBtn.href = `https://wa.me/573180187501?text=${message}`;
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCartCount();
+        }
+        
+        function clearCart() {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCartCount();
+        }
+        
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        
+        // Añadir estilos adicionales para el carrito
+        const style = document.createElement('style');
+        style.textContent = `
+            .cart-item { display: flex; gap: 20px; border: 1px solid #ddd; padding: 15px; margin: 10px 0; align-items: center; }
+            .cart-img { width: 80px; height: 80px; object-fit: contain; }
+            .cart-info { flex: 1; }
+            .remove-btn { background: red; color: white; border: none; padding: 10px; cursor: pointer; }
+            .cart-total { margin-top: 30px; text-align: right; }
+            .clear-cart { background: #dc3545; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-left: 10px; }
+        `;
+        document.head.appendChild(style);
+        
+        renderCart();
+    </script>
+</body>
+</html>

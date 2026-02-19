@@ -23,16 +23,62 @@ header {
         opacity: 1;
         transform: translateY(0);
     }
+}.product-text {
+            flex: 1; /* El texto ocupa el resto del espacio */
+        }
+        #productDescription {
+    /* Elimina cualquier límite de altura */
+    max-height: none !important; 
+    overflow: visible !important;
+    white-space: normal; /* Permite que el texto haga salto de línea */
+    line-height: 1.6;   /* Mejora la legibilidad */
 }
+        .product-text h2 {
+            margin-top: 0;
+        }
+        .buy-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745; /* Verde para "buy" */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .buy-button:hover {
+            background-color: #218838;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
 
 .product-detail img {
     max-width: 100%;
-    height: 500px;
+    height: 400px;
     align-content: center;
     border-radius: 8px;
     margin-bottom: 20px;
 }
-
+.product-detail {
+    max-width: 98%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 20px;
+}
+ 
 .back-link {
     display: inline-block;
     margin-bottom: 20px;
@@ -246,4 +292,68 @@ nav a:hover {
 
 .whatsapp-link:hover {
     background-color: #128c7e;
+}
+
+/* Stock */
+.stock {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+.in-stock { color: green; }
+.out-of-stock { color: red; }
+
+/* Controles de cantidad */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.qty-btn:hover { background: #555; }
+
+.qty-display {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Botón añadir */
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background: #25D366;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.add-to-cart:hover { background: #128C7E; }
+
+.add-to-cart:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Carrito en header */
+.cart-link {
+    background: #25D366;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white !important;
 }

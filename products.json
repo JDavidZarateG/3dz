@@ -2,29 +2,36 @@
   {
     "category": "materas",
     "title": "Zenith Black",
-    "description": "Elegante maceta con diseño geométrico en espiral, ideal para interiores modernos y escritorios minimalistas.",
+    "short_description": "Elegante maceta con diseño geométrico en espiral, ideal para interiores modernos y escritorios minimalistas.",
+    "large_description": "<p>Esta pieza destaca por su diseño orgánico y dinámico. Las líneas curvas en relieve no solo aportan una textura visual increíble, sino que demuestran una gran precisión en el manejo de perímetros y capas.</p><ul><li><strong>Material:</strong> PLA de alta calidad con acabado satinado.</li><li><strong>Uso ideal:</strong> Suculentas, cactus o como pieza decorativa minimalista.</li><li><strong>Destacado:</strong> Textura táctil única que juega con las luces y sombras.</li></ul>",
     "price": "15.000",
+    "stock": 1,
     "image": "Images/Inventory/PlantPotSuculentBlackModel1.png"
   },
   {
     "category": "llaveros",
     "title": "Llavero Teddy Bear",
-    "description": "Tierno oso decorativo impreso con un gradiente de color cálido y un corazón entre sus manos.",
+    "short_description": "Tierno oso decorativo impreso con un gradiente de color cálido y un corazón entre sus manos.",
+    "large_description": "<p>Este tierno diseño combina la nostalgia de un oso clásico con una estética moderna. Su acabado en gradiente resalta cada detalle del relieve, desde las texturas de las patas hasta el corazón que sostiene.</p><ul><li><strong>Material:</strong> PLA Silk (Seda) con efecto gradiente bicolor.</li><li><strong>Acabado:</strong> Brillo sedoso con transición de color suave.</li><li><strong>Uso ideal:</strong> Accesorio para llaves, decoración de bolsos o regalo personalizado.</li></ul>",
     "price": "$10.000",
+    "stock": 2,
     "image": "Images/Inventory/TeddyBearKeyChain.png"
   },
   {
     "category": "accesorios",
     "title": "Rosa Custom Box",
-    "description": "Joyero personalizado con nombre en relieve y detalle de rosa en 3D",
+    "short_description": "Joyero personalizado con nombre en relieve y detalle de rosa en 3D",
+    "large_description": "<p>Un diseño funcional y emocional. Este cofre cuenta con una tapa de encaje perfecto, ideal para regalos personalizados o para guardar objetos de valor con un toque especial.</p><ul><li><strong>Material:</strong> PLA Rojo vibrante.</li><li><strong>Personalización:</strong> Disponible con nombres o relieves (como el modelo con rosa).</li><li><strong>Uso ideal:</strong> Joyero, empaque de regalo o decoración de San Valentín.</li></ul>",
     "price": "$30.000",
+    "stock": 10,
     "image": "Images/Inventory/HeartBox.png"
   },
   {
     "category": "llaveros",
     "title": "Llavero Runner Style",
-    "description": "Llavero detallado inspirado en calzado deportivo, ligero y resistente para el día a día.",
+    "short_description": "Llavero detallado inspirado en calzado deportivo, ligero y resistente para el día a día.",
     "price": "5.000",
+    "stock": 10,
     "image": "Images/Inventory/NikeRunningShoe.png"
   }
 ]

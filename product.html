@@ -4,106 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .logo {
-            height: 100px;
-        }
-        .container {
-            max-width: 1000px; /* Aumentado para acomodar el layout horizontal */
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .product-detail {
-            display: flex; /* Flexbox para alinear imagen y texto horizontalmente */
-            gap: 20px; /* Espacio entre imagen y texto */
-            align-items: flex-start; /* Alinea al inicio */
-        }
-        .product-detail img {
-            max-width: 50%; /* Imagen ocupa la mitad del ancho */
-            height: auto;
-            border-radius: 8px;
-        }
-        .product-text {
-            flex: 1; /* El texto ocupa el resto del espacio */
-        }
-        .product-text h2 {
-            margin-top: 0;
-        }
-        .buy-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #28a745; /* Verde para "buy" */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .buy-button:hover {
-            background-color: #218838;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .whatsapp-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #25d366;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .whatsapp-link:hover {
-            background-color: #128c7e;
-        }
-        /* Responsividad para móviles */
-        @media (max-width: 768px) {
-            .product-detail {
-                flex-direction: column; /* Apila imagen y texto verticalmente en móviles */
-            }
-            .product-detail img {
-                max-width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Detalles del Producto</h1>
+        <div class="header-content">
+            <img src="Images/LOGO 3DZ.png" alt="Logo 3DZ" class="logo"> 
+            <h1>Detalles del Producto</h1>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html/#catalog">Catálogo</a>  <!-- Enlace a la sección de catálogo en la misma página -->
+                <a href="nosotros.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+
+        </div>
         <!-- Opcional: Agrega logo si quieres -->
-        <!-- <img src="images/logo.png" alt="Logo 3DZ" class="logo"> -->
     </header>
     
     <div class="container">
@@ -114,7 +30,7 @@
             <div class="product-text">
                 <h2 id="productTitle">Cargando...</h2>
                 <p id="productDescription">Cargando...</p>
-                <h2><strong>Precio:</strong> <span id="productPrice">Cargando...</span></h2>
+                <h2><strong>Precio: </strong> $ <span id="productPrice">Cargando...</span> COP</h2>
                 <!-- Botón "Comprar" debajo del texto -->
                 <a id="buyButton" href="#" class="buy-button">Comprar</a>
             </div>
@@ -129,13 +45,13 @@
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const title = decodeURIComponent(urlParams.get('title') || 'Producto no encontrado');
-        const description = decodeURIComponent(urlParams.get('description') || 'Descripción no disponible');
+        const large_description = decodeURIComponent(urlParams.get('large_description') || 'Descripción no disponible');
         const price = decodeURIComponent(urlParams.get('price') || 'Precio no disponible');
         const image = decodeURIComponent(urlParams.get('image') || '');
 
         // Poblar la página con valores por defecto si faltan
         document.getElementById('productTitle').textContent = title;
-        document.getElementById('productDescription').textContent = description;
+        document.getElementById('productDescription').innerHTML = large_description;
         document.getElementById('productPrice').textContent = price;
         if (image) {
             document.getElementById('productImage').src = image;
