@@ -1,3 +1,7 @@
+/* ========================================
+   RESET BÁSICO Y ESTILOS GENERALES
+   ======================================== */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,150 +10,86 @@ body {
     color: #333;
 }
 
-header {
-    background-color: #f4f4f4;
-    /* Fondo opcional */
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}.product-text {
-            flex: 1; /* El texto ocupa el resto del espacio */
-        }
-        #productDescription {
-    /* Elimina cualquier límite de altura */
-    max-height: none !important; 
-    overflow: visible !important;
-    white-space: normal; /* Permite que el texto haga salto de línea */
-    line-height: 1.6;   /* Mejora la legibilidad */
-}
-        .product-text h2 {
-            margin-top: 0;
-        }
-        .buy-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #28a745; /* Verde para "buy" */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .buy-button:hover {
-            background-color: #218838;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-.product-detail img {
-    max-width: 100%;
-    height: 400px;
-    align-content: center;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-.product-detail {
-    max-width: 98%;
+.container {
+    max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    gap: 20px;
-}
- 
-.back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
 }
 
-.back-link:hover {
-    text-decoration: underline;
+/* ========================================
+   HEADER Y NAVEGACIÓN
+   ======================================== */
+
+header {
+    background-color: #222;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
-    /* Logo a la izquierda, nav a la derecha */
     align-items: center;
     max-width: 1200px;
-    /* Ancho máximo para centrar */
     margin: 0 auto;
 }
 
 .logo {
-    height: 150px;
-    /* Ajusta el tamaño del logo */
+    height: 80px;
     width: auto;
 }
 
-nav {
+/* Menú de navegación - Escritorio */
+.nav-menu {
     display: flex;
-    gap: 10px;
-    /* Espacio entre enlaces */
+    gap: 20px;
+    align-items: center;
 }
 
-nav a {
+.nav-menu a {
+    color: #fff;
     text-decoration: none;
-    color: #333;
     font-weight: bold;
-    padding: 10px;
     transition: color 0.3s;
 }
 
-nav a:hover {
-    color: #007bff;
-    /* Color al pasar el mouse */
+.nav-menu a:hover {
+    color: #f4a261;
 }
 
-/* Responsividad para móviles */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        /* Apila logo y nav verticalmente */
-        text-align: center;
-    }
-
-    nav {
-        margin-top: 10px;
-    }
+/* Botón hamburguesa - Oculto en PC */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
 }
 
-.container {
-    align-content: center;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+.bar {
+    width: 25px;
+    height: 3px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
 }
 
-/* Estilos para la galería */
+/* Carrito en header */
+.cart-link {
+    background: #25D366;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white !important;
+}
+
+/* ========================================
+   GALERÍA Y CARRUSEL
+   ======================================== */
+
 .gallery {
     margin-bottom: 40px;
     position: relative;
@@ -216,6 +156,10 @@ nav a:hover {
     background-color: white;
 }
 
+/* ========================================
+   CATÁLOGO DE PRODUCTOS
+   ======================================== */
+
 .filters {
     text-align: center;
     margin-bottom: 20px;
@@ -240,33 +184,35 @@ nav a:hover {
 .catalog {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 20;
+    gap: 20px;
+    padding: 20px;
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
 .product {
-    flex: 1 1 300px;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-
 }
 
 .product:hover {
     transform: scale(1.01);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-
 }
 
 .product img {
@@ -278,20 +224,9 @@ nav a:hover {
     border-radius: 8px;
 }
 
-.whatsapp-link {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #25d366;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.whatsapp-link:hover {
-    background-color: #128c7e;
+.product h2 {
+    margin-top: 10px;
+    font-size: 18px;
 }
 
 /* Stock */
@@ -300,6 +235,7 @@ nav a:hover {
     font-weight: bold;
     margin: 5px 0;
 }
+
 .in-stock { color: green; }
 .out-of-stock { color: red; }
 
@@ -330,7 +266,7 @@ nav a:hover {
     text-align: center;
 }
 
-/* Botón añadir */
+/* Botón añadir al carrito */
 .add-to-cart {
     width: 100%;
     padding: 10px;
@@ -350,10 +286,138 @@ nav a:hover {
     cursor: not-allowed;
 }
 
-/* Carrito en header */
-.cart-link {
-    background: #25D366;
-    padding: 8px 15px;
-    border-radius: 20px;
-    color: white !important;
+/* ========================================
+   ENLACE WHATSAPP
+   ======================================== */
+
+.whatsapp-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.whatsapp-link:hover {
+    background-color: #128c7e;
+}
+
+/* ========================================
+   PÁGINA DE DETALLE DE PRODUCTO
+   ======================================== */
+
+.product-detail {
+    max-width: 98%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 20px;
+}
+
+.product-detail img {
+    max-width: 100%;
+    height: 400px;
+    align-content: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.product-text {
+    flex: 1;
+}
+
+.product-text h2 {
+    margin-top: 0;
+}
+
+#productDescription {
+    max-height: none;
+    overflow: visible;
+    white-space: normal;
+    line-height: 1.6;
+}
+
+.buy-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #218838;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   RESPONSIVE - CELULARES
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Header responsivo */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        background-color: #222;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        transition: 0.3s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #444;
+    }
+
+    /* Ajustes del catálogo para móviles */
+    .catalog {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .product-detail {
+        flex-direction: column;
+    }
+
+    .product-detail img {
+        height: 250px;
+    }
 }

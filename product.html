@@ -1,42 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilos para las variaciones */
+        .product-variations {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            display: none;
+            /* Oculto por defecto */
+        }
+
+        .variation-group {
+            margin-bottom: 20px;
+        }
+
+        .variation-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .variation-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        /* Estilos para los colores (rectángulos redondeados) */
+        .color-options,
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.selected {
+            border-color: #333;
+            transform: scale(1.1);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #333;
+        }
+
+        /* NUEVO: Estilos para los tamaños (recuadros con texto) */
+        .size-box {
+            min-width: 45px;
+            height: 40px;
+            padding: 0 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .size-box:hover {
+            border-color: #999;
+            transform: translateY(-2px);
+        }
+
+        .size-box.selected {
+            border-color: #333;
+            background-color: #333;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div class="header-content">
-            <img src="Images/LOGO 3DZ.png" alt="Logo 3DZ" class="logo"> 
+            <img src="Images/LOGO 3DZ.png" alt="Logo 3DZ" class="logo">
             <h1>Detalles del Producto</h1>
             <nav>
                 <a href="index.html">Inicio</a>
-                <a href="index.html/#catalog">Catálogo</a>  <!-- Enlace a la sección de catálogo en la misma página -->
+                <a href="index.html/#catalog">Catálogo</a>
                 <a href="nosotros.html">Nosotros</a>
                 <a href="contacto.html">Contacto</a>
             </nav>
-
         </div>
-        <!-- Opcional: Agrega logo si quieres -->
     </header>
-    
+
     <div class="container">
         <a href="index.html" class="back-link">&larr; Volver al Catálogo</a>
-        
+
         <div class="product-detail">
             <img id="productImage" src="" alt="Producto">
             <div class="product-text">
                 <h2 id="productTitle">Cargando...</h2>
                 <p id="productDescription">Cargando...</p>
                 <h2><strong>Precio: </strong> $ <span id="productPrice">Cargando...</span> COP</h2>
-                <!-- Botón "Comprar" debajo del texto -->
+
+                <!-- Sección de Variaciones -->
+                <div class="product-variations" id="productVariations">
+
+                    <!-- Selector de Color -->
+                    <div class="variation-group" id="colorGroup" style="display: none;">
+                        <label class="variation-label">Color:</label>
+                        <div class="color-options" id="colorOptions"></div>
+                    </div>
+
+                    <!-- Selector de Talla (Ahora como recuadros) -->
+                    <div class="variation-group" id="sizeGroup" style="display: none;">
+                        <label class="variation-label">Tamaño:</label>
+                        <div class="size-options" id="sizeOptions"></div>
+                    </div>
+
+                </div>
+
+                <!-- Botón "Comprar" -->
                 <a id="buyButton" href="#" class="buy-button">Comprar</a>
             </div>
         </div>
-        
-        <a id="whatsappLink" href="https://wa.me/573180187501?text=Hola,%20estoy%20interesado%20en%20este%20producto" class="whatsapp-link" target="_blank">
+
+        <a id="whatsappLink" href="https://wa.me/573180187501?text=Hola,%20estoy%20interesado%20en%20este%20producto"
+            class="whatsapp-link" target="_blank">
             Contactar por WhatsApp
         </a>
     </div>
@@ -44,27 +151,119 @@
     <script>
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
+
         const title = decodeURIComponent(urlParams.get('title') || 'Producto no encontrado');
         const large_description = decodeURIComponent(urlParams.get('large_description') || 'Descripción no disponible');
         const price = decodeURIComponent(urlParams.get('price') || 'Precio no disponible');
         const image = decodeURIComponent(urlParams.get('image') || '');
 
-        // Poblar la página con valores por defecto si faltan
+        // Obtener variaciones
+        let colors = [];
+        let sizes = [];
+
+        try {
+            const colorsParam = urlParams.get('colors');
+            if (colorsParam) {
+                colors = JSON.parse(decodeURIComponent(colorsParam));
+            }
+        } catch (e) {
+            console.log('No hay colores definidos');
+        }
+
+        try {
+            const sizesParam = urlParams.get('sizes');
+            if (sizesParam) {
+                sizes = JSON.parse(decodeURIComponent(sizesParam));
+            }
+        } catch (e) {
+            console.log('No hay tallas definidas');
+        }
+
+        // Poblar datos básicos del producto
         document.getElementById('productTitle').textContent = title;
         document.getElementById('productDescription').innerHTML = large_description;
         document.getElementById('productPrice').textContent = price;
+
         if (image) {
             document.getElementById('productImage').src = image;
         } else {
-            document.getElementById('productImage').src = 'images/placeholder.png';  // Imagen por defecto si no hay
+            document.getElementById('productImage').src = 'images/placeholder.png';
         }
 
-        // Actualizar el enlace de WhatsApp y el botón "Comprar" con el título del producto
+        // Elementos del DOM
+        const variationsContainer = document.getElementById('productVariations');
+        const colorGroup = document.getElementById('colorGroup');
+        const sizeGroup = document.getElementById('sizeGroup');
+        const colorContainer = document.getElementById('colorOptions');
+        const sizeContainer = document.getElementById('sizeOptions');
+
+        let selectedColor = null;
+        let selectedSize = null;
+
+        // Renderizar opciones de color
+        if (colors && colors.length > 0) {
+            colorGroup.style.display = 'block';
+            variationsContainer.style.display = 'block'; // Mostrar contenedor principal
+
+            colors.forEach(color => {
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch';
+                swatch.style.backgroundColor = color.hex;
+                swatch.title = color.name;
+                swatch.onclick = function () {
+                    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedColor = color.name;
+                    updateWhatsappLink();
+                };
+                colorContainer.appendChild(swatch);
+            });
+        }
+
+        // Renderizar opciones de talla (ahora como recuadros)
+        if (sizes && sizes.length > 0) {
+            sizeGroup.style.display = 'block';
+            variationsContainer.style.display = 'block'; // Mostrar contenedor principal
+
+            sizes.forEach(size => {
+                const box = document.createElement('div');
+                box.className = 'size-box';
+                box.textContent = size;
+                box.onclick = function () {
+                    document.querySelectorAll('.size-box').forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedSize = size;
+                    updateWhatsappLink();
+                };
+                sizeContainer.appendChild(box);
+            });
+        }
+
+        // Elementos para actualizar enlaces
         const whatsappLink = document.getElementById('whatsappLink');
         const buyButton = document.getElementById('buyButton');
-        const whatsappUrl = `https://wa.me/573180187501?text=Hola,%20estoy%20interesado%20en%20comprar%20el%20producto:%20${encodeURIComponent(title)}`;
-        whatsappLink.href = whatsappUrl;
-        buyButton.href = whatsappUrl;  // El botón "Comprar" también enlaza al WhatsApp
+
+        // Función para actualizar el enlace de WhatsApp
+        function updateWhatsappLink() {
+            let mensaje = `Hola,%20estoy%20interesado%20en%20comprar:%20${encodeURIComponent(title)}`;
+
+            if (selectedColor) {
+                mensaje += `%20-%20Color:%20${encodeURIComponent(selectedColor)}`;
+            }
+
+            if (selectedSize) {
+                mensaje += `%20-%20Tamaño:%20${encodeURIComponent(selectedSize)}`;
+            }
+
+            const whatsappUrl = `https://wa.me/573180187501?text=${mensaje}`;
+
+            whatsappLink.href = whatsappUrl;
+            buyButton.href = whatsappUrl;
+        }
+
+        // Inicializar con mensaje por defecto
+        updateWhatsappLink();
     </script>
 </body>
+
 </html>

@@ -34,5 +34,28 @@
     "price": "5.000",
     "stock": 10,
     "image": "Images/Inventory/NikeRunningShoe.png"
+  },
+  {
+    "category": "llaveros",
+    "title": "Llavero BTS",
+    "short_description": "Llavero iconico de la banda BTS",
+    "large_description": "<p> Lleva contigo la esencia del reencuentro con este llavero de Arirang de BTS. Un tributo al emblemático regreso de la banda, que simboliza el anhelo y la conexión eterna con el ARMY a través de la raíz más profunda de la cultura coreana.</p>",
+    "price": "10.000",
+    "stock": 18,
+    "image": "Images/Inventory/ArirangKeyChain.png"
+  },
+  {
+    "category": "accesorios",
+    "title": "Rosa para Mamá",
+    "short_description": "Llavero iconico de la banda BTS",
+    "large_description": "<p> Lleva contigo la esencia del reencuentro con este llavero de Arirang de BTS. Un tributo al emblemático regreso de la banda, que simboliza el anhelo y la conexión eterna con el ARMY a través de la raíz más profunda de la cultura coreana.</p>",
+    "price": "10.000",
+    "colors": [
+      {"name": "Rosado  ", "hex": "#FFC5D3"}
+    ],
+     "sizes": ["Mediano", "Grande"]
+    ,
+    "stock": 18,
+    "image": "Images/Inventory/MomRose.png"
   }
 ]
